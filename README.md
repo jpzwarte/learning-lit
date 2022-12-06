@@ -5,7 +5,7 @@ Try Lit yourself: https://lit.dev/playground/
 ## Topics
 
 ### Basics
-- Lifecycle methods
+- ✅ Lifecycle methods
 - Properties & events
 - Rendering
 - Unit testing
