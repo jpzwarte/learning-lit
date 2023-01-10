@@ -3,17 +3,17 @@
 ## Custom Element API
 
 - ❌ constructor
-- ✅ connectedCallback
+- ✅ connectedCallback -> `ngOnInit`
 - ❌ adoptedCallback
 - ❌ attributeChangedCallback
-- ✅ disconnectedCallback
+- ✅ disconnectedCallback -> `ngOnDestroy`
 
 ## `LitElement` API
 
 - ✅ willUpdate
 - ❌ update
-- ✅ updated
-- ✅ firstUpdated
+- ✅ updated -> `ngOnChanges`
+- ✅ firstUpdated -> `ngAfterViewInit`
 
 ## Example 1
 
