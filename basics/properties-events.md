@@ -8,6 +8,7 @@ Properties on a web component are just like properties on built-in elements (suc
 
 ```ts
 @property() name?: string;
+@property() name: string | undefined;
 ```
 
 ```html
@@ -19,6 +20,14 @@ Properties on a web component are just like properties on built-in elements (suc
 
 ```ts
 @property({ type: Boolean, reflect: true, attribute: 'no-border' }) noBorder?: boolean;
+
+this.noBorder = true;
+```
+
+```css
+:host([no-border]) {
+  --_border: none;
+}
 ```
 
 ```html
@@ -64,13 +73,13 @@ There is no special event mechanism in web components or Lit elements (similar t
 override connectedCallback(): void {
   super.connectedCallback();
 
-  document.addEventListener('click', this.#onDocumentClick);
+  document.addEventListener('scroll', this.#onDocumentClick);
 }
 
 override disconnectedCallback(): void {
   document.removeEventListener('click', this.#onDocumentClick);
 
-  super.disconnectedCallback().
+  super.disconnectedCallback();
 }
 ```
 
@@ -116,5 +125,19 @@ onClick(event: Event): void {
 
 onInput(event: Event): void {
   ...
+}
+```
+
+## Example 5
+
+```html
+<button @click=${this.#onClick}>
+```
+
+```ts
+class Foo extends LitElement {
+  #onClick(event: Event): void {
+    console.log('click', { event });
+  }
 }
 ```

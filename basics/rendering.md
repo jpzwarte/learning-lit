@@ -22,7 +22,7 @@ class Foo extends HTMLElement {
       }
     `;
 
-    this.append(div, style);
+    this.shadowRoot.append(div, style);
   }
 }
 ```
@@ -38,6 +38,8 @@ class Foo extends LitElement {
     }
   `;
 
+  message = 'World';
+
   /**
    * This can return several things:
    * - `TemplateResult`: the return type of `html`
@@ -45,7 +47,7 @@ class Foo extends LitElement {
    * - A string
    */
   render() {
-    return html`Hello world`;
+    return html`<div>Hello ${this.message}</div>`;
   }
 }
 ```
@@ -60,8 +62,8 @@ override render(): TemplateResult {
     <h1>The items</h1>
     <ul>
       ${this.items 
-        ? this.items.map(item => html`<li>${item.name}</li>`)
-        : 'No items'
+        ? this.items.map(item => html`<li>${item}</li>`)
+        : '<li class="empty">No items</li>'
       }
     </ul>
   `;
@@ -95,8 +97,10 @@ renderList(items: string[]): TemplateResult {
 ```ts
 return html`
   <tr class=${classMap({ selected, [this.name]: true, foo: true })}></tr>
+  <tr class="selected bar foo">
 
   <td part=${ifDefined(parts)}>
+  <img src=${ifDefined(this.imageUrl)}>
 
   <span aria-hidden="true" class="direction">
     ${choose(
@@ -109,4 +113,28 @@ return html`
     )}
   </span>
 `;
+```
+
+## Example 5
+
+```ts
+@property() data: string[];
+
+@state() state?: string[];
+
+willUpdate(changes: PropertyValues<this>): void {
+  if (changes.has('data')) {
+    this.state = [...this.state, data];
+  }
+}
+
+render() {
+  return html`
+    ${this.state.map(...)}
+  `;
+}
+
+onClick(): void {
+  this.state = this.state.filter(item => !item.state);
+}
 ```
