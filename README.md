@@ -6,8 +6,8 @@ Try Lit yourself: https://lit.dev/playground/
 
 ### Basics
 - ✅ Lifecycle methods
-- Properties & events
-- Rendering
+- ✅ Properties & events
+- ✅ Rendering
 - Unit testing
 - Mocking/stubbing with Sinon
 
